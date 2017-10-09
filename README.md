@@ -9,3 +9,8 @@ Just like lodash `get` accepts `.` delimeted path instead of an array:
 const pathGetter = R.compose(R.path, R.split('.'))
 const get = R.curry((path, obj) => pathGetter(path)(obj))
 ```
+
+usage:
+```js
+get('a.b', {a: {b: 8}}) //8
+```
