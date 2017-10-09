@@ -16,7 +16,7 @@ get('a.b', {a: {b: 8}}) //8
 ```
 
 
-## set, `String → {s: a} → a`
+## set, `String → a → {a} → {a}`
 Sets a property on an object using given path, returns new object.
 ```js
 const pathSetter = R.compose(R.assocPath, R.split('.'))
