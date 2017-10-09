@@ -14,3 +14,17 @@ usage:
 ```js
 get('a.b', {a: {b: 8}}) //8
 ```
+
+
+## set, `String → {s: a} → a`
+Sets a property on an object using given path, returns new object.
+```js
+const pathSetter = R.compose(R.assocPath, R.split('.'))
+const set = R.curry((path, value, obj) => pathSetter(path)(value, obj))
+```
+
+usage:
+```js
+set('a.b.c', 8, {}) // {a: {b: {c: 8}}}
+```
+
