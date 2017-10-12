@@ -28,3 +28,10 @@ usage:
 set('a.b.c', 8, {}) // {a: {b: {c: 8}}}
 ```
 
+## isNilOrEmpty `Obj → Boolean`
+Checks if value is nil or empty.
+
+```js
+const isNilOrEmpty = converge(or, [isNil, isEmpty])
+```
+
