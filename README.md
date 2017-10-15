@@ -35,7 +35,7 @@ Checks if value is nil or empty.
 const isNilOrEmpty = R.converge(R.or, [R.isNil, R.isEmpty])
 ```
 
-## differenceAllWith
+## differenceAllWith(predicate, listOfLists)
 Same as differenceWith, but for multiple lists
 ```js
   const differenceAllWith = R.curry((predicate, array) =>
