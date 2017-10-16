@@ -3,7 +3,9 @@
 
 Function are defined in a readme for now.
 
-## get, `String → {s: a} → a`
+## get
+`String → {s: a} → a`
+
 Just like lodash `get` accepts `.` delimeted path instead of an array:
 ```js
 const pathGetter = R.compose(R.path, R.split('.'))
