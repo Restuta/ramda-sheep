@@ -62,14 +62,14 @@ Replaces original items with given array of items using predicate, if predicate 
   const replaceBy = R.curry((predicate, replaceWithItems, originalItems) =>
     R.compose(
       R.reduce(
-        (eventsAcc, eventMap) =>
-          R.update(eventMap.index, eventMap.event, eventsAcc),
+        (acc, itemsMap) =>
+          R.update(itemsMap.index, itemsMap.item, acc),
         originalItems
       ),
       R.map(replacementItem => ({
-        event: replacementItem,
+        item: replacementItem,
         index: R.findIndex(
-          targetItem => predicate(targetItem, replacementItem),
+          originalItem => predicate(originalItem, replacementItem),
           originalItems
         )
       }))
