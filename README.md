@@ -46,3 +46,29 @@ Same as differenceWith, but for multiple lists
   ))
 ```
 
+## replaceBy(predicate, replaceWithItems, originalItems) `((originalItem, itemToReplaceWith) → Boolean) → Array → Array → Array`
+Replaces original items with given array of items using predicate, if predicate returns true, item will be replaced in original items in-place (it's orignal index) with the item from "replaceWithItems".
+
+```js
+  const replaceBy = R.curry((predicate, replaceWithItems, originalItems) =>
+    R.compose(
+      R.reduce(
+        (eventsAcc, eventMap) =>
+          R.update(eventMap.index, eventMap.event, eventsAcc),
+        originalItems
+      ),
+      R.map(replacementItem => ({
+        event: replacementItem,
+        index: R.findIndex(
+          targetItem => predicate(targetItem, replacementItem),
+          originalItems
+        )
+      }))
+    )(replaceWithItems))
+```
+
+usage:
+
+```js
+replaceBy((original, updated) => original.id === updated.id, updatedUsers, allUsers)
+```
