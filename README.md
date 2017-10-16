@@ -16,7 +16,9 @@ get('a.b', {a: {b: 8}}) //8
 ```
 
 
-## set, `String → a → {a} → {a}`
+## set 
+`String → a → {a} → {a}`
+
 Sets a property on an object using given path, returns new object.
 ```js
 const pathSetter = R.compose(R.assocPath, R.split('.'))
@@ -28,7 +30,9 @@ usage:
 set('a.b.c', 8, {}) // {a: {b: {c: 8}}}
 ```
 
-## isNilOrEmpty `Obj → Boolean`
+## isNilOrEmpty 
+`Obj → Boolean`
+
 Checks if value is nil or empty.
 
 ```js
@@ -36,6 +40,7 @@ const isNilOrEmpty = R.converge(R.or, [R.isNil, R.isEmpty])
 ```
 
 ## differenceAllWith(predicate, listOfLists)
+
 Same as differenceWith, but for multiple lists
 ```js
   const differenceAllWith = R.curry((predicate, array) =>
@@ -48,6 +53,7 @@ Same as differenceWith, but for multiple lists
 
 ## replaceBy(predicate, replaceWithItems, originalItems) 
 `((originalItem, itemToReplaceWith) → Boolean) → Array → Array → Array`
+
 Replaces original items with given array of items using predicate, if predicate returns true, item will be replaced in original items in-place (it's orignal index) with the item from "replaceWithItems".
 
 ```js
