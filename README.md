@@ -46,7 +46,8 @@ Same as differenceWith, but for multiple lists
   ))
 ```
 
-## replaceBy(predicate, replaceWithItems, originalItems) `((originalItem, itemToReplaceWith) → Boolean) → Array → Array → Array`
+## replaceBy(predicate, replaceWithItems, originalItems) 
+`((originalItem, itemToReplaceWith) → Boolean) → Array → Array → Array`
 Replaces original items with given array of items using predicate, if predicate returns true, item will be replaced in original items in-place (it's orignal index) with the item from "replaceWithItems".
 
 ```js
