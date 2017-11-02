@@ -38,7 +38,7 @@ set('a.b.c', 8, {}) // {a: {b: {c: 8}}}
 Checks if value is nil or empty.
 
 ```js
-const isNilOrEmpty = R.converge(R.or, [R.isNil, R.isEmpty])
+const isNilOrEmpty = R.either(R.isNil, R.isEmpty)
 ```
 
 ## differenceAllWith(predicate, listOfLists)
