@@ -1,7 +1,9 @@
 # ramda-sheep
 𝑓(🐏) = 🐑, A set of useful functions built on top of Ramda that are not in the core. 
 
-Function are defined in a readme for now.
+Function are defined in a readme for now. 
+
+If you are looking for more advanced set of extensions look at [ramda-adjunct](https://github.com/char0n/ramda-adjunct)
 
 ## get
 `String → {s: a} → a`
