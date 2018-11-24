@@ -83,3 +83,28 @@ usage:
 ```js
 replaceBy((original, updated) => original.id === updated.id, updatedUsers, allUsers)
 ```
+
+## pluckPath(strPath, list)
+
+Like `R.pluck`, but with string path as a first argument. `R.pluck` allows to specify property name, while `pluckPath` can work with propert pathes like `myProp.otherProp.nestedProp`
+
+```js
+const pluckPath = R.pipe(
+  R.split('.'),
+  R.path,
+  R.map,
+)
+const pluckPathCurr = R.curry((path, obj) => pluckPath(path)(obj))
+```
+
+usage:
+
+```js
+const list = [
+  { x: { y: 1} },
+  { x: { y: 2} },
+  { x: { y: 3} },
+]
+
+pluckPath('x.y')(list) // [1, 2, 3]
+```
