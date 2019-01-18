@@ -125,7 +125,7 @@ reduceObj((acc, [key, val]) => return acc, {}, obj)
 
 
 ## transformObjectDeep
-Recursively traverse object and apply trarnformer function to every `[key, value]` pair and form new object based on that. If tranformation function returns `undefined` then those `[key, value]` paris get removed from the original object. Keeps arrays as-is, meaning object inside an array won't be transformed.
+Recursively traverse object and apply transformer function to every `[key, value]` pair and form new object based on that. If tranformation function returns `undefined` then those `[key, value]` paris get removed from the original object. Keeps arrays as-is, meaning object inside an array won't be transformed.
 
 ```js
 const reduceObj = R.useWith(R.reduce, [R.identity, R.identity, R.toPairs]);
