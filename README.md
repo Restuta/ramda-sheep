@@ -108,3 +108,78 @@ const list = [
 
 pluckPath('x.y')(list) // [1, 2, 3]
 ```
+
+## reduceObj
+
+Like R.reduce, but for objects.
+
+```js
+const reduceObj = R.useWith(R.reduce, [R.identity, R.identity, R.toPairs]);
+```
+
+usage: 
+
+```js
+reduceObj((acc, [key, val]) => return acc, {}, obj)
+```
+
+
+## transformObjectDeep
+Recursively traverse object and apply trarnformer function to every `[key, value]` pair and form new object based on that. If tranformation function returns `undefined` then those `[key, value]` paris get removed from the original object. Keeps arrays as-is, meaning object inside an array won't be transformed.
+
+```js
+const reduceObj = R.useWith(R.reduce, [R.identity, R.identity, R.toPairs]);
+
+// given key value pair return new key value pair or nothing
+const removeEmptyKeysTranformer = ([key, val]) => {
+  if (val === undefined) {
+    return undefined;
+  }
+  return [key, val];
+};
+
+// transformer is a function that takes [key, value] and return transformed pair or undefined
+// if undefined is returned that pair is going to be removed from the object. Recursively applied
+// properties of the object. Keeps arrays as-is, meaning object inside an array won't be transformed.
+const tranformObjectDeep = (transformer, obj) => {
+  return reduceObj(
+    (acc, [key, val]) => {
+      if (!Array.isArray(val) && typeof val === 'object') {
+        const transformedVal = tranformObjectDeep(transformer, val);
+
+        if (R.keys(transformedVal).length === 0) {
+          return acc;
+        }
+        acc[key] = transformedVal;
+        return acc;
+      }
+
+      const transformedKeyVal = transformer([key, val]);
+
+      if (transformedKeyVal === undefined) {
+        return acc;
+      }
+
+      const [tKey, tVal] = transformedKeyVal;
+      acc[tKey] = tVal;
+
+      return acc;
+    },
+    {},
+    obj,
+  );
+};
+```
+
+usage: 
+```js
+// given key value pair return new key value pair or nothing
+const removeEmptyKeysTransformer = ([key, val]) => {
+  if (val === undefined) {
+    return undefined;
+  }
+  return [key, val];
+};
+
+tranformObjectDeep(removeEmptyKeysTransformer, { x: 8, y: undefined } ); //output: { x: 8 }
+```
