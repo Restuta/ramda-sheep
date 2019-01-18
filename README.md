@@ -141,7 +141,7 @@ const removeEmptyKeysTransformer = ([key, val]) => {
 // transformer is a function that takes [key, value] and return transformed pair or undefined
 // if undefined is returned that pair is going to be removed from the object. Recursively applied
 // properties of the object. Keeps arrays as-is, meaning object inside an array won't be transformed.
-const transformObjectDeep = (transformer, obj) => {
+const transformObjectDeep = R.curry((transformer, obj) => {
   return reduceObj(
     (acc, [key, val]) => {
       if (!Array.isArray(val) && typeof val === 'object') {
@@ -168,7 +168,7 @@ const transformObjectDeep = (transformer, obj) => {
     {},
     obj,
   );
-};
+});
 ```
 
 usage: 
