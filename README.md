@@ -125,13 +125,13 @@ reduceObj((acc, [key, val]) => return acc, {}, obj)
 
 
 ## transformObjectDeep
-Recursively traverse object and apply transformer function to every `[key, value]` pair and form new object based on that. If tranformation function returns `undefined` then those `[key, value]` paris get removed from the original object. Keeps arrays as-is, meaning object inside an array won't be transformed.
+Recursively traverse object and apply transformer function to every `[key, value]` pair and form new object based on that. If transformation function returns `undefined` then those `[key, value]` paris get removed from the original object. Keeps arrays as-is, meaning object inside an array won't be transformed.
 
 ```js
 const reduceObj = R.useWith(R.reduce, [R.identity, R.identity, R.toPairs]);
 
 // given key value pair return new key value pair or nothing
-const removeEmptyKeysTranformer = ([key, val]) => {
+const removeEmptyKeysTransformer = ([key, val]) => {
   if (val === undefined) {
     return undefined;
   }
@@ -141,11 +141,11 @@ const removeEmptyKeysTranformer = ([key, val]) => {
 // transformer is a function that takes [key, value] and return transformed pair or undefined
 // if undefined is returned that pair is going to be removed from the object. Recursively applied
 // properties of the object. Keeps arrays as-is, meaning object inside an array won't be transformed.
-const tranformObjectDeep = (transformer, obj) => {
+const transformObjectDeep = (transformer, obj) => {
   return reduceObj(
     (acc, [key, val]) => {
       if (!Array.isArray(val) && typeof val === 'object') {
-        const transformedVal = tranformObjectDeep(transformer, val);
+        const transformedVal = transformObjectDeep(transformer, val);
 
         if (R.keys(transformedVal).length === 0) {
           return acc;
@@ -181,5 +181,5 @@ const removeEmptyKeysTransformer = ([key, val]) => {
   return [key, val];
 };
 
-tranformObjectDeep(removeEmptyKeysTransformer, { x: 8, y: undefined } ); //output: { x: 8 }
+transformObjectDeep(removeEmptyKeysTransformer, { x: 8, y: undefined } ); //output: { x: 8 }
 ```
