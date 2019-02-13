@@ -55,6 +55,28 @@ Same as differenceWith, but for multiple lists
   ))
 ```
 
+## strReplaceAll(search, replacement, target)
+
+Replaces all occurences of a string with given replacement string. 
+
+```js
+const strReplaceAll = R.curry((search, replacement, str) =>
+	R.replace(new RegExp(search, 'g'), replacement, str),
+)
+```
+
+usage:
+
+```js
+
+R.pipe(
+  strReplaceAll('&', 'ramda'), 
+  strReplaceAll('x', 'is'),
+  strReplaceAll('y', 'cool'),
+)('& x y')
+// outputs "ramda is cool"
+```
+
 ## replaceBy(predicate, replaceWithItems, originalItems) 
 `((originalItem, itemToReplaceWith) → Boolean) → Array → Array → Array`
 
