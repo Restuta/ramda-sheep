@@ -133,7 +133,7 @@ pluckPath('x.y')(list) // [1, 2, 3]
 
 ## indexByWith
 
-Like R.indexBy, but accepts addition tranformation function to transform value for the given key.
+Like R.indexBy, but accepts additional tranformation function to transform value for the given key.
 
 ```js
 const R = require('ramda')
