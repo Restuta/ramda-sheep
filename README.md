@@ -138,7 +138,7 @@ Like R.indexBy, but accepts additional tranformation function to transform value
 ```js
 const R = require('ramda')
 
-const indexByWith = R.curry((fn, keygenFunc, items) =>
+const indexByWith = R.curry((keygenFunc, fn, items) =>
   R.reduce(
     (acc, item) => {
       acc[keygenFunc(item)] = fn(item)
@@ -153,7 +153,7 @@ const indexByWith = R.curry((fn, keygenFunc, items) =>
 usage:
 
 ```js
-indexByWith(item => ({ a: item }), R.prop('foo'), [
+indexByWith(R.prop('foo'), item => ({ a: item }), [
   { foo: 1 },
   { foo: 2 },
   { foo: 3 },
