@@ -136,15 +136,17 @@ pluckPath('x.y')(list) // [1, 2, 3]
 Like R.indexBy, but accepts addition tranformation function to transform value for the given key.
 
 ```js
+const R = require('ramda')
+
 const indexByWith = R.curry((fn, keygenFunc, items) =>
-	R.reduce(
-		(acc, item) => {
-			acc[keygenFunc(item)] = fn(item)
-			return acc
-		},
-		{},
-		items,
-	),
+  R.reduce(
+    (acc, item) => {
+      acc[keygenFunc(item)] = fn(item)
+      return acc
+    },
+    {},
+    items,
+  ),
 )
 ```
 
