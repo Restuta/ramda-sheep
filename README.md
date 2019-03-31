@@ -131,6 +131,33 @@ const list = [
 pluckPath('x.y')(list) // [1, 2, 3]
 ```
 
+## indexByWith
+
+Like R.indexBy, but accepts addition tranformation function to transform value for the given key.
+
+```js
+const indexByWith = R.curry((fn, keygenFunc, items) =>
+	R.reduce(
+		(acc, item) => {
+			acc[keygenFunc(item)] = fn(item)
+			return acc
+		},
+		{},
+		items,
+	),
+)
+```
+
+usage:
+
+```js
+indexByWith(item => ({ a: item }), R.prop('foo'), [
+  { foo: 1 },
+  { foo: 2 },
+  { foo: 3 },
+])
+```
+
 ## reduceObj
 
 Like R.reduce, but for objects.
