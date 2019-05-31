@@ -234,3 +234,27 @@ const removeEmptyKeysTransformer = ([key, val]) => {
 
 transformObjectDeep(removeEmptyKeysTransformer, { x: 8, y: undefined } ); //output: { x: 8 }
 ```
+
+# findMaxBy
+`Func → [a] → a`
+
+Find element in a list that has max value specified in the provided path using path getter function.
+
+```js
+const findMaxBy = R.curry((path, arr) =>
+  R.pipe(R.reduce((acc, x) => (path(acc) > path(x) ? acc : x), {}))(arr),
+)
+```
+
+usage:
+
+```js
+const prs = [
+	{ pullRequests: { totalCount: 10 } },
+	{ pullRequests: { totalCount: 8 } },
+	{ pullRequests: { totalCount: 20 } },
+	{ pullRequests: { totalCount: 12 } },
+]
+
+findMaxBy(R.path(['pullRequests', 'totalCount']), prs) // outputs: { pullRequests: { totalCount: 20 } } 
+```
