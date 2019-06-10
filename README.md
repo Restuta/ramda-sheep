@@ -111,13 +111,13 @@ replaceBy((original, updated) => original.id === updated.id, updatedUsers, allUs
 Replaces item found using given predicate with a new item. To update multiple items use `replaceBy` defined above.
 
 ```js
-const updateWhen = R.curry((func, value, target) => 
+const updateBy = R.curry((func, value, target) => 
 	R.update(R.findIndex(func, target), value, target))
 ```
 
 usage: 
 ```js
-updateWhen(x => x === 1, 'hi', [0,1,2,3]) //? [ 0, 'hi', 2, 3 ] 
+updateBy(x => x === 1, 'hi', [0,1,2,3]) //? [ 0, 'hi', 2, 3 ] 
 ```
 
 ## pluckPath(strPath, list)
