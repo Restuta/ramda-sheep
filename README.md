@@ -106,6 +106,19 @@ usage:
 replaceBy((original, updated) => original.id === updated.id, updatedUsers, allUsers)
 ```
 
+## updateBy(predicate, item, target)
+
+Replaces item found using given predicate with a new item. To update multiple items use `replaceBy` defined above.
+
+```js
+const updateWhen = R.curry((func, value, target) =>  R.update(R.findIndex(func, target), value, target))
+```
+
+usage: 
+```js
+updateWhen(x => x === 1, 'hi', [0,1,2,3]) //? [ 0, 'hi', 2, 3 ] 
+```
+
 ## pluckPath(strPath, list)
 
 Like `R.pluck`, but with string path as a first argument. `R.pluck` allows to specify property name, while `pluckPath` can work with propert pathes like `myProp.otherProp.nestedProp`
