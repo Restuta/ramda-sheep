@@ -272,3 +272,9 @@ const prs = [
 
 findMaxBy(R.path(['pullRequests', 'totalCount']), prs) // outputs: { pullRequests: { totalCount: 20 } } 
 ```
+
+
+---
+
+## Curated List of Libraries
+[Partial Lenses](https://github.com/calmm-js/partial.lenses)
