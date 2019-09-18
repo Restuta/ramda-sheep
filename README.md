@@ -209,7 +209,7 @@ const removeEmptyKeysTransformer = ([key, val]) => {
 const transformObjectDeep = R.curry((transformer, obj) => {
   return reduceObj(
     (acc, [key, val]) => {
-      if (!Array.isArray(val) && val !== null && typeof val === 'object') { {
+      if (!Array.isArray(val) && val !== null && typeof val === 'object') {
         const transformedVal = transformObjectDeep(transformer, val);
 
         if (R.keys(transformedVal).length === 0) {
