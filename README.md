@@ -206,15 +206,28 @@ const removeEmptyKeysTransformer = ([key, val]) => {
 // transformer is a function that takes [key, value] and return transformed pair or undefined
 // if undefined is returned that pair is going to be removed from the object. Recursively applied
 // properties of the object. Keeps arrays as-is, meaning object inside an array won't be transformed.
-const transformObjectDeep = R.curry((transformer, obj) => {
+// transformer is a function that takes [key, value] and return transformed pair or undefined
+// if undefined is returned that pair is going to be removed from the object. Recursively applied
+// properties of the object. Keeps arrays as-is, meaning object inside an array won't be transformed.
+// Handles circular references. 
+const transformObjectDeep = R.curry((transformer, obj, objectCache = undefined) => {
+  const cache = objectCache || new Set();
+  cache.add(obj);
+
   return reduceObj(
     (acc, [key, val]) => {
       if (!Array.isArray(val) && val !== null && typeof val === 'object') {
-        const transformedVal = transformObjectDeep(transformer, val);
-
-        if (R.keys(transformedVal).length === 0) {
+        // detecting circular references
+        if (cache.has(val)) {
+          log.warn(`🌀 Circular reference detected in "transformObjectDeep", skipping, key=${key}`);
+          acc[key] = `[Circular]`;
           return acc;
         }
+
+        cache.add(val);
+
+        const transformedVal = transformObjectDeep(transformer, val, cache);
+
         acc[key] = transformedVal;
         return acc;
       }
