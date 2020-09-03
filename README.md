@@ -108,11 +108,13 @@ replaceBy((original, updated) => original.id === updated.id, updatedUsers, allUs
 
 ## updateBy(predicate, item, target)
 
-Replaces item found using given predicate with a new item. To update multiple items use `replaceBy` defined above.
+Updates first item found using given predicate with a new item. To update multiple items use `replaceBy` defined above.
 
 ```js
-const updateBy = R.curry((func, value, target) => 
-	R.update(R.findIndex(func, target), value, target))
+const updateBy = R.curry((func, value, target) => {
+  const index = R.findIndex(func, target);
+  return index >= 0 ? R.update(index, value, target) : target;
+});
 ```
 
 usage: 
